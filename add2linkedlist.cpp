@@ -110,6 +110,31 @@ Node* sum(Node* first, Node* second){
     return ans;
 }
 
+void insertatpos(Node* &head,int data,int pos,Node* &tail){
+    if(pos==1){
+        insertathead(head,data);
+        return ;
+    }
+    Node* temp=new Node(data);
+    Node*pre=head;
+
+    for(int i=1;i<pos-1;i++){
+        pre=pre->next;
+
+    }
+    if(pre->next==NULL){
+        insertattail(tail,data);
+        return ;
+    }
+    temp->next=pre->next;
+    pre->next->prev=temp;
+    pre->next=temp;
+    temp->prev=pre;
+
+
+}
+
+
 void print(Node* head){
     Node* temp = head;
     while(temp!=NULL){
@@ -131,7 +156,7 @@ int main(){
     insertAtEnd(head1,end1,7);
     insertAtEnd(head1,end1,8);
     print(head1);
-
+    insertatpos(head1,80,2,end1);
 
     Node* result = sum(head,head1);
     print(result);
